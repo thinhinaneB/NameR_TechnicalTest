@@ -1,5 +1,7 @@
 import psycopg2
+import urllib
 from Scraping import Spider
+import wget
 
 class DBStroring():
     def storeDB(self, gen):
@@ -16,6 +18,7 @@ class DBStroring():
                 cursor.execute(query, record)
                 connection.commit()
                 count = cursor.rowcount
+                self.storeLocal(item)
             print (" succesful insertion into DB ")
         except (Exception, psycopg2.Error) as error :
                 if(connection):
@@ -27,9 +30,11 @@ class DBStroring():
                 print("PostgreSQL connection is closed")
 
 
-    
+    def storeLocal(self, item):
+        
+            wget.download(item["latest"], item["title"])  
 
 a= Spider()
 s=DBStroring()
 g=a.parse("https://www.data.gouv.fr/api/1/datasets/?page=3000&page_size=1")
-s.store(g)
+s.storeDB(g)
