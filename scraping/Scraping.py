@@ -10,7 +10,7 @@ class Spider():
 
     def parse(self, url):
         myDict={}
-        for i in range (1,5):
+        for i in range (1,6):
             url=self.start_url.format(3000+i)
             resp = self.request(url)
             json_resp=resp.json()
