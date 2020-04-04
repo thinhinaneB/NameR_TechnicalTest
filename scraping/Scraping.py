@@ -21,5 +21,3 @@ class Spider():
 
 a= Spider()
 g=a.parse("https://www.data.gouv.fr/api/1/datasets/?page=3000&page_size=1")
-for item in g : 
-    print item
