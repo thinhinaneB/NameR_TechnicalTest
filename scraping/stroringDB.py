@@ -2,7 +2,7 @@ import psycopg2
 from Scraping import Spider
 
 class DBStroring():
-    def store(self, gen):
+    def storeDB(self, gen):
         try:
             connection = psycopg2.connect(user="postgres",
                                             password="tina",
@@ -12,7 +12,7 @@ class DBStroring():
             cursor = connection.cursor()
             query = """ INSERT INTO items (title, latest) VALUES (%s,%s)"""
             for item in gen:
-                record = (item["title"], "latest")
+                record = (item["title"], item["latest"])
                 cursor.execute(query, record)
                 connection.commit()
                 count = cursor.rowcount
@@ -25,6 +25,9 @@ class DBStroring():
                 cursor.close()
                 connection.close()
                 print("PostgreSQL connection is closed")
+
+
+    
 
 a= Spider()
 s=DBStroring()
