@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Datasets </title>
+    <link href="{{ url_for('static',filename='materialize.min.css') }}" type="text/css" rel="stylesheet"
+          media="screen,projection"/>
+
+</head>
+
+<body>
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="" class="brand-logo"> Datasets</a>      
+    </div>
+</nav>
+
+<div class="container">
+    <h1 class="header center orange-text">Here is our Datasets list </h1>
+    <ul class="collection with-header">      
+        <table rules="all">
+          <tr>
+            <th>Title</th>
+            <th></th>
+          </tr>    
+              {% for item in items %}
+              <tr>
+              <td class="collection-item"><a href="#">{{ item }}</a></td>
+              <td><a href="/items/{{item}}" target="blank"><button class='btn btn-default'>Download</button></a></td>           
+            </tr>                      
+                  {% endfor %}      
+        </table>  
+    </ul>
+</div>
+</body>
+</html>

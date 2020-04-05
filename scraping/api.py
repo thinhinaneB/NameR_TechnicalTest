@@ -1,4 +1,4 @@
-from flask import Flask, request,send_from_directory
+from flask import Flask, request,send_from_directory,render_template 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -7,7 +7,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres@localhos
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-UPLOAD_DIRECTORY = "/files"
+UPLOAD_DIRECTORY = "./files"
 
 
 
@@ -27,9 +27,9 @@ class ItemModel(db.Model):
         return "<Item " +self.title
 
 
-@app.route('/')
-def hello():
-	return {"hello": "world"}
+@app.route("/")
+def home():
+    return render_template("home.html",items=itms_title_lit())
 
 
 @app.route('/items', methods=[ 'GET'])
@@ -44,6 +44,12 @@ def handle_items():
 
         return {"count": len(results), "items": results, "message": "success"}
 
+
+def itms_title_lit():
+    list_tiles=[]
+    for item in handle_items()["items"]:
+        list_tiles.append(item["title"])
+    return list_tiles
 
 @app.route("/items/<path:path>",methods=[ 'GET'])
 def get_file(path):
