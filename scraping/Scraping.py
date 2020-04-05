@@ -17,6 +17,7 @@ class Spider():
             myDict["title"]=json_resp ["data"][0]["resources"][0]["title"]
             myDict["latest"]=json_resp["data"][0]["resources"][0]["latest"]            
             yield myDict
+
        
 
 a= Spider()

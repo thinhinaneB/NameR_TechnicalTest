@@ -30,9 +30,8 @@ class DBStroring():
                 print("PostgreSQL connection is closed")
 
 
-    def storeLocal(self, item):
-        
-            wget.download(item["latest"], item["title"])  
+    def storeLocal(self, item):   
+            wget.download(item["latest"], "./files/"+item["title"])  
 
 a= Spider()
 s=DBStroring()
