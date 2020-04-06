@@ -31,7 +31,7 @@ class DBStroring():
 
 
     def storeLocal(self, item):   
-            wget.download(item["latest"], "./files/"+item["title"])  
+            wget.download(item["latest"], "files/"+item["title"])  
 
 a= Spider()
 s=DBStroring()
