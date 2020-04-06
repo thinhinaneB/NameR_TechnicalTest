@@ -29,11 +29,11 @@ class ItemModel(db.Model):
 
 @app.route("/")
 def home():
-    return render_template("home.html",items=itms_title_lit())
+    return render_template("home.html",items=itms_title_list())
 
 
 @app.route('/items', methods=[ 'GET'])
-def handle_items():
+def items():
 
         items = ItemModel.query.all()
         results = [
@@ -45,11 +45,11 @@ def handle_items():
         return {"count": len(results), "items": results, "message": "success"}
 
 
-def itms_title_lit():
-    list_tiles=[]
-    for item in handle_items()["items"]:
-        list_tiles.append(item["title"])
-    return list_tiles
+def itms_title_list():
+    list_titles=[]
+    for item in items()["items"]:
+        list_titles.append(item["title"])
+    return list_titles
 
 @app.route("/items/<path:path>",methods=[ 'GET'])
 def get_file(path):
